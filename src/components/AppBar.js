@@ -1,10 +1,11 @@
-import styled, { css } from 'styled-components'
+import styled  from 'styled-components'
 import React, { PureComponent } from 'react';
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import Typography from "@material-ui/core/Typography";
 import { default as MUIAppBar } from "@material-ui/core/AppBar";
+import { StyledLink } from './StyledLink';
+import StyledButton from "./StyledButton";
 
 
 export class AppBar extends PureComponent {
@@ -20,13 +21,15 @@ export class AppBar extends PureComponent {
                             Open Food Network
                         </Typography>
                     </div>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
+                    <StyledButton color="inherit" isUppercase={false}>
                         <ShoppingCart />
-                        <span>
-                            My cart
-                            {cartQuantity > 0 && <span>&nbsp;({cartQuantity})</span>}
-                        </span>
-                    </IconButton>
+                        <StyledLink to="/cart" color="inherit">
+                            <span>
+                                My cart
+                                    {cartQuantity > 0 && <span>&nbsp;({cartQuantity})</span>}
+                            </span>
+                        </StyledLink>
+                    </StyledButton>
                 </Toolbar>
             </MUIAppBar>
         )

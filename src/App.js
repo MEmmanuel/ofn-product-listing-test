@@ -2,6 +2,11 @@ import axios from 'axios/index';
 import styled  from 'styled-components'
 
 import React, {Component} from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Container from "@material-ui/core/Container";
@@ -10,6 +15,7 @@ import Grid from '@material-ui/core/Grid';
 import './App.css';
 import { AppBar } from './components/AppBar';
 import { ProductCard } from './components/ProductCard';
+import { StyledLink } from './components/StyledLink';
 
 
 const theme = createMuiTheme({
@@ -64,18 +70,30 @@ class App extends Component {
     render = () => {
         return (
             <div className="App">
-                <ThemeProvider theme={theme}>
-                    <AppBar cartQuantity={this.state.cart.length} />
-                    <StyledContainer fixed maxWidth={"md"}>
-                        <Grid container spacing={4}>
-                            {this.state.products.map(product =>
-                                <Grid item xs={12} key={product.id}>
-                                    <ProductCard product={product} onAddToCart={this.handleAddToCart}></ProductCard>
-                                </Grid>
-                            )}
-                        </Grid>
-                    </StyledContainer>
-                </ThemeProvider>
+                <Router>
+                    <ThemeProvider theme={theme}>
+                        <AppBar cartQuantity={this.state.cart.length} />
+                        <StyledContainer fixed maxWidth={"md"}>
+                            <Switch>
+                                <Route path="/cart">
+                                    <h1>This is your cart</h1>
+                                    <StyledLink to="/">
+                                        Back to list
+                                    </StyledLink>
+                                </Route>
+                                <Route path="/">
+                                    <Grid container spacing={4}>
+                                        {this.state.products.map(product =>
+                                            <Grid item xs={12} key={product.id}>
+                                                <ProductCard product={product} onAddToCart={this.handleAddToCart}></ProductCard>
+                                            </Grid>
+                                        )}
+                                    </Grid>
+                                </Route>
+                            </Switch>
+                        </StyledContainer>
+                    </ThemeProvider>
+                </Router>
             </div>
         )
     }
