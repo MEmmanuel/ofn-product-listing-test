@@ -1,12 +1,15 @@
 import axios from 'axios/index';
+import styled  from 'styled-components'
 
 import React, {Component} from 'react';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import Container from "@material-ui/core/Container";
+import Grid from '@material-ui/core/Grid';
 
 import './App.css';
 import { AppBar } from './components/AppBar';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { ProductCard } from './components/ProductCard';
 
 
 const theme = createMuiTheme({
@@ -28,6 +31,11 @@ const theme = createMuiTheme({
         },
     }
 });
+
+
+const StyledContainer = styled(Container)`
+    padding-top: 37px;
+`
 
 
 class App extends Component {
@@ -53,7 +61,15 @@ class App extends Component {
             <div className="App">
                 <ThemeProvider theme={theme}>
                     <AppBar />
-                    {this.state.products.map(product => <div key={product.id}>{product.name}</div>)}
+                    <StyledContainer fixed maxWidth={"md"}>
+                        <Grid container spacing={4}>
+                            {this.state.products.map(product =>
+                                <Grid item xs={12}>
+                                    <ProductCard key={product.id} product={product}></ProductCard>
+                                </Grid>
+                            )}
+                        </Grid>
+                    </StyledContainer>
                 </ThemeProvider>
             </div>
         )
