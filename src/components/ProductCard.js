@@ -56,9 +56,11 @@ export class ProductCard extends PureComponent {
                         </GrowGrid>
                         <Grid item>
                             <ActionsContainer>
-                                <ActionsGridContainer container direction="column" justify="space-between">
+                                <ActionsGridContainer container direction="column" justify="space-between" alignItems="flex-end">
                                     <Grid item>
-                                        <StyledChip label="Vegetables" size="small" color="secondary" bold={700} isUppercase />
+                                        <StyledChip label={product.taxon.name}
+                                                    size="small" color="secondary"
+                                                    bold={700} isUppercase />
                                     </Grid>
                                     <Grid item>
                                         <StyledButton color="primary" variant="contained" bold={700} isUppercase>
