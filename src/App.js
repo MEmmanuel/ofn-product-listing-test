@@ -64,8 +64,8 @@ class App extends Component {
                     <StyledContainer fixed maxWidth={"md"}>
                         <Grid container spacing={4}>
                             {this.state.products.map(product =>
-                                <Grid item xs={12}>
-                                    <ProductCard key={product.id} product={product}></ProductCard>
+                                <Grid item xs={12} key={product.id}>
+                                    <ProductCard product={product}></ProductCard>
                                 </Grid>
                             )}
                         </Grid>
