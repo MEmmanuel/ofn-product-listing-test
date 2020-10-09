@@ -39,7 +39,7 @@ const GrowGrid = styled(Grid)`
 
 export class ProductCard extends PureComponent {
     render() {
-        const { product } = this.props;
+        const { product, onAddToCart } = this.props;
 
         return (
             <StyledCard>
@@ -63,7 +63,10 @@ export class ProductCard extends PureComponent {
                                                     bold={700} isUppercase />
                                     </Grid>
                                     <Grid item>
-                                        <StyledButton color="primary" variant="contained" bold={700} isUppercase>
+                                        <StyledButton color="primary" variant="contained"
+                                                      bold={700} isUppercase
+                                                      onClick={onAddToCart}
+                                        >
                                             Add to cart
                                         </StyledButton>
                                     </Grid>

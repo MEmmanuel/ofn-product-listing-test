@@ -9,6 +9,8 @@ import { default as MUIAppBar } from "@material-ui/core/AppBar";
 
 export class AppBar extends PureComponent {
     render() {
+        const { cartQuantity } = this.props;
+
         return (
             <MUIAppBar position="static">
                 <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
@@ -22,6 +24,7 @@ export class AppBar extends PureComponent {
                         <ShoppingCart />
                         <span>
                             My cart
+                            {cartQuantity > 0 && <span>&nbsp;({cartQuantity})</span>}
                         </span>
                     </IconButton>
                 </Toolbar>

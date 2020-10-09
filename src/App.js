@@ -41,6 +41,7 @@ const StyledContainer = styled(Container)`
 class App extends Component {
     state = {
         products: [],
+        cart: [],
     };
 
     componentDidMount = () => {
@@ -56,16 +57,20 @@ class App extends Component {
             })
     };
 
+    handleAddToCart = product => {
+        this.setState({cart: [...this.state.cart, product]})
+    };
+
     render = () => {
         return (
             <div className="App">
                 <ThemeProvider theme={theme}>
-                    <AppBar />
+                    <AppBar cartQuantity={this.state.cart.length} />
                     <StyledContainer fixed maxWidth={"md"}>
                         <Grid container spacing={4}>
                             {this.state.products.map(product =>
                                 <Grid item xs={12} key={product.id}>
-                                    <ProductCard product={product}></ProductCard>
+                                    <ProductCard product={product} onAddToCart={this.handleAddToCart}></ProductCard>
                                 </Grid>
                             )}
                         </Grid>
