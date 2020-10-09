@@ -47,7 +47,8 @@ export class ProductCard extends PureComponent {
                     <StyledGridContainer container direction="row">
                         <Grid item>
                             <PictureContainer>
-                                <img src={process.env.PUBLIC_URL + '/images/potatoes.png'} alt="Open Food Network Logo" />
+                                <img src={process.env.PUBLIC_URL + `/images/${product.permalink}.png`}
+                                     alt={product.images.alt} />
                             </PictureContainer>
                         </Grid>
                         <GrowGrid item>
