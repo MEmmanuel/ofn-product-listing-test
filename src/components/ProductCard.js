@@ -21,7 +21,7 @@ const StyledGridContainer = styled(Grid)`
 
 const StyledCard = styled(Card)`
     box-shadow: 0px 0px 4px 0px #000000;
-    height: 119px;
+    min-height: 119px;
 `;
 
 const PictureContainer = styled.div`
@@ -37,7 +37,7 @@ const ActionsGridContainer = styled(Grid)`
 `;
 
 const GrowGrid = styled(Grid)`
-    flex-grow: 1;
+    flex: 1;
 `;
 
 const UnitSpan = styled.span`
