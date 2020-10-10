@@ -8,7 +8,7 @@ import {StyledChip} from "./StyledChip";
 
 
 const StyledCardContent = styled(CardContent)`
-    height: calc(100% - 40px)
+    height: calc(100% - 24px)
 `;
 
 const StyledGridContainer = styled(Grid)`
@@ -48,7 +48,7 @@ export class ProductCard extends PureComponent {
         return (
             <StyledCard>
                 <StyledCardContent>
-                    <StyledGridContainer container direction="row">
+                    <StyledGridContainer container direction="row" spacing={2}>
                         <Grid item>
                             <PictureContainer>
                                 <img src={process.env.PUBLIC_URL + `/images/${product.permalink}.png`}

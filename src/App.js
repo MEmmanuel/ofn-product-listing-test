@@ -16,6 +16,7 @@ import './App.css';
 import { AppBar } from './components/AppBar';
 import { ProductCard } from './components/ProductCard';
 import { StyledLink } from './components/StyledLink';
+import Typography from "@material-ui/core/Typography";
 
 
 const theme = createMuiTheme({
@@ -41,6 +42,15 @@ const theme = createMuiTheme({
 
 const StyledContainer = styled(Container)`
     padding-top: 37px;
+`
+
+const EmptyCartContainer = styled.div`
+    padding-top: 53px;
+`
+
+const StyledTypography = styled(Typography)`
+    padding-top: 15px;
+    padding-bottom: 22px;
 `
 
 
@@ -81,25 +91,34 @@ class App extends Component {
                         <StyledContainer fixed maxWidth={"md"}>
                             <Switch>
                                 <Route path="/cart">
-                                    <StyledLink to="/">
+                                    <StyledLink to="/" fontSize={10}>
                                         &lt; back to Products
                                     </StyledLink>
-                                    <h1>My cart</h1>
-                                    <Grid container spacing={4}>
-                                        {this.state.cart.map((product, index) =>
-                                            <Grid item xs={12} key={index}>
-                                                <ProductCard product={product}
-                                                             productIndex={index}
-                                                             cartAction={{
-                                                                 text: "Remove",
-                                                                 color: "primary",
-                                                                 backgroundColor: "#E47131",
-                                                                 handler: this.handleRemoveFromCart,
-                                                             }}
-                                                />
+                                    <StyledTypography variant="h6">My cart</StyledTypography>
+                                    {
+                                        this.state.cart.length > 0 && (
+                                            <Grid container spacing={4}>
+                                                {this.state.cart.map((product, index) =>
+                                                    <Grid item xs={12} key={index}>
+                                                        <ProductCard product={product}
+                                                                     productIndex={index}
+                                                                     cartAction={{
+                                                                         text: "Remove",
+                                                                         color: "primary",
+                                                                         backgroundColor: "#E47131",
+                                                                         handler: this.handleRemoveFromCart,
+                                                                     }}
+                                                        />
+                                                    </Grid>
+                                                )}
                                             </Grid>
-                                        )}
-                                    </Grid>
+                                        )
+                                    }
+                                    {
+                                        this.state.cart.length === 0 && (
+                                            <EmptyCartContainer>Empty cart, no fun :(</EmptyCartContainer>
+                                        )
+                                    }
                                 </Route>
                                 <Route path="/">
                                     <Grid container spacing={4}>
