@@ -21,7 +21,7 @@ export class AppBar extends PureComponent {
                             Open Food Network
                         </Typography>
                     </div>
-                    <StyledButton color="inherit" isUppercase={false}>
+                    <StyledButton color="inherit" $uppercase={false}>
                         <ShoppingCart />
                         <StyledLink to="/cart" color="inherit">
                             <span>

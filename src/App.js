@@ -134,7 +134,7 @@ class App extends Component {
                                                     <TotalTitleSpan>Total: </TotalTitleSpan>
                                                     <TotalSpan>€ {totalCartPrice.toFixed(2)}</TotalSpan>
                                                     <StyledButton color="secondary" variant="contained"
-                                                                  bold={700} uppercase={false} marginLeft={20}
+                                                                  bold={700} $uppercase={false} $marginLeft={20}
                                                                   onClick={this.handleCartAction}
                                                     >
                                                         Proceed to checkout

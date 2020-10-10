@@ -95,12 +95,12 @@ export class ProductCard extends PureComponent {
                                     <Grid item>
                                         <StyledChip label={product.taxon.name}
                                                     size="small" color="secondary"
-                                                    bold={700} uppercase />
+                                                    bold={700} $uppercase />
                                     </Grid>
                                     <Grid item>
                                         <StyledButton color={cartAction.color} variant="contained"
-                                                      bold={700} uppercase={false}
-                                                      backgroundColor={cartAction.backgroundColor}
+                                                      bold={700} $uppercase={false}
+                                                      $backgroundColor={cartAction.backgroundColor}
                                                       onClick={this.handleCartAction}
                                         >
                                             {cartAction.text}
