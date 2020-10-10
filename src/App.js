@@ -59,12 +59,17 @@ class App extends Component {
 
         return axios.get(`${process.env.PUBLIC_URL}${path}`)
             .then(response => {
-                this.setState({products: response.data});
+                this.setState({products: response.data, cart: [response.data[0]]})
             })
     };
 
-    handleAddToCart = product => {
+    handleAddToCart = (product, productIndex) => {
         this.setState({cart: [...this.state.cart, product]})
+    };
+
+    handleRemoveFromCart = (product, productIndex) => {
+        this.setState({cart: this.state.cart.slice(0, productIndex)
+                .concat(this.state.cart.slice(productIndex + 1, this.state.cart.length))})
     };
 
     render = () => {
@@ -76,16 +81,38 @@ class App extends Component {
                         <StyledContainer fixed maxWidth={"md"}>
                             <Switch>
                                 <Route path="/cart">
-                                    <h1>This is your cart</h1>
                                     <StyledLink to="/">
-                                        Back to list
+                                        &lt; back to Products
                                     </StyledLink>
+                                    <h1>My cart</h1>
+                                    <Grid container spacing={4}>
+                                        {this.state.cart.map((product, index) =>
+                                            <Grid item xs={12} key={index}>
+                                                <ProductCard product={product}
+                                                             productIndex={index}
+                                                             cartAction={{
+                                                                 text: "Remove",
+                                                                 color: "primary",
+                                                                 backgroundColor: "#E47131",
+                                                                 handler: this.handleRemoveFromCart,
+                                                             }}
+                                                />
+                                            </Grid>
+                                        )}
+                                    </Grid>
                                 </Route>
                                 <Route path="/">
                                     <Grid container spacing={4}>
-                                        {this.state.products.map(product =>
+                                        {this.state.products.map((product, index) =>
                                             <Grid item xs={12} key={product.id}>
-                                                <ProductCard product={product} onAddToCart={this.handleAddToCart}></ProductCard>
+                                                <ProductCard product={product}
+                                                             productIndex={index}
+                                                             cartAction={{
+                                                                 text: "Add to cart",
+                                                                 color: "primary",
+                                                                 handler: this.handleAddToCart,
+                                                             }}
+                                                />
                                             </Grid>
                                         )}
                                     </Grid>
