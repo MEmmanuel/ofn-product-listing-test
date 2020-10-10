@@ -60,11 +60,11 @@ export class ProductCard extends PureComponent {
                                     <Grid item>
                                         <StyledChip label={product.taxon.name}
                                                     size="small" color="secondary"
-                                                    bold={700} isUppercase />
+                                                    bold={700} uppercase />
                                     </Grid>
                                     <Grid item>
                                         <StyledButton color="primary" variant="contained"
-                                                      bold={700} isUppercase
+                                                      bold={700} uppercase={false}
                                                       onClick={onAddToCart}
                                         >
                                             Add to cart
