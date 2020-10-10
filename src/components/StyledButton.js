@@ -13,7 +13,7 @@ export const StyledButton = styled(Button).attrs(({bold, $uppercase, $background
 }))`
     font-weight: ${props => props.bold};
     text-transform: ${props => props.$uppercase ? 'uppercase' : 'unset'};
-    background-color: ${props => props.backgroundColor};
+    background-color: ${props => props.$backgroundColor};
     margin-top: ${props => props.$marginTop}px;
     margin-right: ${props => props.$marginRight}px;
     margin-bottom: ${props => props.$marginBottom}px;
