@@ -10,14 +10,11 @@ import {
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Container from "@material-ui/core/Container";
-import Grid from '@material-ui/core/Grid';
 
 import './App.css';
 import { AppBar } from './components/AppBar';
-import { ProductCard } from './components/ProductCard';
-import { StyledLink } from './components/StyledLink';
-import Typography from "@material-ui/core/Typography";
-import {StyledButton} from "./components/StyledButton";
+import CartPage from "./pages/cart";
+import ListPage from "./pages/list";
 
 
 const theme = createMuiTheme({
@@ -44,28 +41,6 @@ const theme = createMuiTheme({
 const StyledContainer = styled(Container)`
     padding-top: 37px;
     padding-bottom: 100px;
-`
-
-const EmptyCartContainer = styled.div`
-    padding-top: 53px;
-`
-
-const StyledTypography = styled(Typography)`
-    padding-top: 15px;
-    padding-bottom: 22px;
-`
-
-const TotalContainer = styled.div`
-    padding-top: 37px;
-`
-
-const TotalTitleSpan = styled.span`
-    font-weight: 700
-`
-
-const TotalSpan = styled.span`
-    color: #5C5C5C;
-    margin-left: 10px;
 `
 
 
@@ -98,8 +73,6 @@ class App extends Component {
     };
 
     render = () => {
-        const totalCartPrice = this.state.cart.reduce((sum, product) => sum + Number(product.price) * 100, 0) / 100;
-
         return (
             <div className="App">
                 <Router>
@@ -108,62 +81,14 @@ class App extends Component {
                         <StyledContainer fixed maxWidth={"md"}>
                             <Switch>
                                 <Route path="/cart">
-                                    <StyledLink to="/" fontSize={10}>
-                                        &lt; back to Products
-                                    </StyledLink>
-                                    <StyledTypography variant="h6">My cart</StyledTypography>
-                                    {
-                                        this.state.cart.length > 0 && (
-                                            <div>
-                                                <Grid container spacing={4}>
-                                                    {this.state.cart.map((product, index) =>
-                                                        <Grid item xs={12} key={index}>
-                                                            <ProductCard product={product}
-                                                                         productIndex={index}
-                                                                         cartAction={{
-                                                                             text: "Remove",
-                                                                             color: "primary",
-                                                                             backgroundColor: "#E47131",
-                                                                             handler: this.handleRemoveFromCart,
-                                                                         }}
-                                                            />
-                                                        </Grid>
-                                                    )}
-                                                </Grid>
-                                                <TotalContainer>
-                                                    <TotalTitleSpan>Total: </TotalTitleSpan>
-                                                    <TotalSpan>€ {totalCartPrice.toFixed(2)}</TotalSpan>
-                                                    <StyledButton color="secondary" variant="contained"
-                                                                  bold={700} $uppercase={false} $marginLeft={20}
-                                                                  onClick={this.handleCartAction}
-                                                    >
-                                                        Proceed to checkout
-                                                    </StyledButton>
-                                                </TotalContainer>
-                                            </div>
-                                        )
-                                    }
-                                    {
-                                        this.state.cart.length === 0 && (
-                                            <EmptyCartContainer>Empty cart, no fun :(</EmptyCartContainer>
-                                        )
-                                    }
+                                    <CartPage cart={this.state.cart}
+                                              onRemoveFromCart={this.handleRemoveFromCart}
+                                    />
                                 </Route>
                                 <Route path="/">
-                                    <Grid container spacing={4}>
-                                        {this.state.products.map((product, index) =>
-                                            <Grid item xs={12} key={product.id}>
-                                                <ProductCard product={product}
-                                                             productIndex={index}
-                                                             cartAction={{
-                                                                 text: "Add to cart",
-                                                                 color: "primary",
-                                                                 handler: this.handleAddToCart,
-                                                             }}
-                                                />
-                                            </Grid>
-                                        )}
-                                    </Grid>
+                                    <ListPage products={this.state.products}
+                                              onAddToCart={this.handleAddToCart}
+                                    />
                                 </Route>
                             </Switch>
                         </StyledContainer>
