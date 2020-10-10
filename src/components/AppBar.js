@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+import styled  from 'styled-components';
+
 import Toolbar from '@material-ui/core/Toolbar';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import Typography from '@material-ui/core/Typography';
@@ -9,19 +11,36 @@ import { default as MUIAppBar } from '@material-ui/core/AppBar';
 import { StyledLink } from './StyledLink';
 import StyledButton from './StyledButton';
 
+
+const FlexToolbar = styled(Toolbar)`
+    display: flex;
+    justify-content: space-between;
+`;
+const FlexDiv = styled.div`
+    display: flex;
+`;
+const MarginImg = styled.img`
+    margin-right: 15px;
+`;
+const StyledTypography = styled(Typography)`
+    max-width: 150px;
+    line-height: 1.2;
+`;
+
+
 export class AppBar extends PureComponent {
     render() {
         const { cartQuantity } = this.props;
 
         return (
             <MUIAppBar position="static">
-                <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
-                    <div>
-                        <img src={process.env.PUBLIC_URL + '/images/OFN_logo.svg'} alt="Open Food Network Logo" />
-                        <Typography variant="h5">
+                <FlexToolbar>
+                    <FlexDiv>
+                        <MarginImg src={process.env.PUBLIC_URL + '/images/OFN_logo.svg'} alt="Open Food Network Logo" />
+                        <StyledTypography variant="h6">
                             Open Food Network
-                        </Typography>
-                    </div>
+                        </StyledTypography>
+                    </FlexDiv>
                     <StyledButton color="inherit" $uppercase={false}>
                         <ShoppingCart />
                         <StyledLink to="/cart" color="inherit">
@@ -31,7 +50,7 @@ export class AppBar extends PureComponent {
                             </span>
                         </StyledLink>
                     </StyledButton>
-                </Toolbar>
+                </FlexToolbar>
             </MUIAppBar>
         );
     }
