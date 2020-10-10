@@ -13,8 +13,8 @@ import Container from '@material-ui/core/Container';
 
 import './App.css';
 import { AppBar } from './components/AppBar';
-import CartPage from './pages/Cart';
-import ListPage from './pages/List';
+import Cart from './pages/CartPage';
+import List from './pages/ListPage';
 
 
 const theme = createMuiTheme({
@@ -81,12 +81,12 @@ class App extends Component {
                         <StyledContainer fixed maxWidth={'md'}>
                             <Switch>
                                 <Route path="/cart">
-                                    <CartPage cart={this.state.cart}
+                                    <Cart cart={this.state.cart}
                                         onRemoveFromCart={this.handleRemoveFromCart}
                                     />
                                 </Route>
                                 <Route path="/">
-                                    <ListPage products={this.state.products}
+                                    <List products={this.state.products}
                                         onAddToCart={this.handleAddToCart}
                                     />
                                 </Route>
