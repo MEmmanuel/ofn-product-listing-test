@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
 
-import {ProductCard} from "../components/ProductCard";
-
+import {ProductCard} from '../components/ProductCard';
 
 export class ListPage extends PureComponent {
     render() {
@@ -14,18 +14,20 @@ export class ListPage extends PureComponent {
                 {products.map((product, index) =>
                     <Grid item xs={12} key={product.id}>
                         <ProductCard product={product}
-                                     productIndex={index}
-                                     cartAction={{
-                                         text: "Add to cart",
-                                         color: "primary",
-                                         handler: onAddToCart,
-                                     }}
+                            productIndex={index}
+                            cartAction={{
+                                text: 'Add to cart',
+                                color: 'primary',
+                                handler: onAddToCart,
+                            }}
                         />
                     </Grid>
                 )}
             </Grid>
-        )
+        );
     }
-};
+}
 
-export default ListPage
+ListPage.propTypes = {products: PropTypes.arrayOf(PropTypes.object), onAddToCart: PropTypes.func};
+
+export default ListPage;

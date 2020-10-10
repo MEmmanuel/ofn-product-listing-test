@@ -1,37 +1,37 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
-import {ProductCard} from "../components/ProductCard";
-import {StyledLink} from "../components/StyledLink";
-import {StyledButton} from "../components/StyledButton";
+import {ProductCard} from '../components/ProductCard';
+import {StyledLink} from '../components/StyledLink';
+import {StyledButton} from '../components/StyledButton';
 
 
 const EmptyCartContainer = styled.div`
     padding-top: 53px;
-`
+`;
 
 const StyledTypography = styled(Typography)`
     padding-top: 15px;
     padding-bottom: 22px;
-`
+`;
 
 const TotalContainer = styled.div`
     padding-top: 37px;
-`
+`;
 
 const TotalTitleSpan = styled.span`
     font-weight: 700
-`
+`;
 
 const TotalSpan = styled.span`
     color: #5C5C5C;
     margin-left: 10px;
-`
-
+`;
 
 export class CartPage extends PureComponent {
     render() {
@@ -51,13 +51,13 @@ export class CartPage extends PureComponent {
                                 {cart.map((product, index) =>
                                     <Grid item xs={12} key={index}>
                                         <ProductCard product={product}
-                                                     productIndex={index}
-                                                     cartAction={{
-                                                         text: "Remove",
-                                                         color: "primary",
-                                                         backgroundColor: "#E47131",
-                                                         handler: onRemoveFromCart,
-                                                     }}
+                                            productIndex={index}
+                                            cartAction={{
+                                                text: 'Remove',
+                                                color: 'primary',
+                                                backgroundColor: '#E47131',
+                                                handler: onRemoveFromCart,
+                                            }}
                                         />
                                     </Grid>
                                 )}
@@ -66,7 +66,7 @@ export class CartPage extends PureComponent {
                                 <TotalTitleSpan>Total: </TotalTitleSpan>
                                 <TotalSpan>€ {totalCartPrice.toFixed(2)}</TotalSpan>
                                 <StyledButton color="secondary" variant="contained"
-                                              bold={700} $uppercase={false} $marginLeft={20}
+                                    bold={700} $uppercase={false} $marginLeft={20}
                                 >
                                     Proceed to checkout
                                 </StyledButton>
@@ -80,8 +80,10 @@ export class CartPage extends PureComponent {
                     )
                 }
             </div>
-        )
+        );
     }
-};
+}
 
-export default CartPage
+CartPage.propTypes = {cart: PropTypes.arrayOf(PropTypes.object), onRemoveFromCart: PropTypes.func};
+
+export default CartPage;
