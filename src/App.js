@@ -61,7 +61,7 @@ class App extends Component {
 
         return axios.get(`${process.env.PUBLIC_URL}${path}`)
             .then(response => {
-                this.setState({products: response.data, cart: [response.data[0]]});
+                this.setState({products: response.data});
             });
     };
 
