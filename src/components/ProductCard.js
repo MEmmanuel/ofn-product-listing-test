@@ -63,13 +63,23 @@ const PriceSpan = styled.span`
     margin-left: 10px;
 `;
 
+const AddedToCartSpan = styled.span`
+    position: relative;
+    font-size: 12px;
+    color: #69A95D;
+    display: block;
+    left: -90px;
+    top: 26px;
+`;
+
+
 export class ProductCard extends PureComponent {
     handleCartAction = () => {
         this.props.cartAction.handler(this.props.product, this.props.productIndex);
     }
 
     render() {
-        const { product, cartAction } = this.props;
+        const { product, cartAction, hasBeenAdded } = this.props;
 
         return (
             <StyledCard>
@@ -101,6 +111,11 @@ export class ProductCard extends PureComponent {
                                             bold={700} $uppercase />
                                     </Grid>
                                     <Grid item>
+                                        {hasBeenAdded && (
+                                            <AddedToCartSpan>
+                                                Added to cart!
+                                            </AddedToCartSpan>
+                                        )}
                                         <StyledButton color={cartAction.color} variant="contained"
                                             bold={700} $uppercase={false}
                                             $backgroundColor={cartAction.backgroundColor}
@@ -128,7 +143,8 @@ ProductCard.propTypes = {
     }),
     product: PropTypes.object,
     productIndex: PropTypes.number,
-    onAddToCart: PropTypes.func
+    onAddToCart: PropTypes.func,
+    hasBeenAdded: PropTypes.bool,
 };
 
 export default styled(ProductCard);

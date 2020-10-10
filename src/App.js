@@ -48,6 +48,8 @@ class App extends Component {
     state = {
         products: [],
         cart: [],
+        lastAddedProduct: null,
+        lastAddedTimeout: null,
     };
 
     componentDidMount = () => {
@@ -64,7 +66,13 @@ class App extends Component {
     };
 
     handleAddToCart = (product) => {
-        this.setState({cart: [...this.state.cart, product]});
+        if (this.state.lastAddedTimeout) {
+            clearTimeout(this.state.lastAddedTimeout);
+        }
+        const lastAddedTimeout = setTimeout(() => {
+            this.setState({lastAddedProduct: null, lastAddedTimeout: null});
+        }, 2000);
+        this.setState({cart: [...this.state.cart, product], lastAddedProduct: product.id, lastAddedTimeout});
     };
 
     handleRemoveFromCart = (product, productIndex) => {
@@ -88,6 +96,7 @@ class App extends Component {
                                 <Route path="/">
                                     <List products={this.state.products}
                                         onAddToCart={this.handleAddToCart}
+                                        lastAddedProduct={this.state.lastAddedProduct}
                                     />
                                 </Route>
                             </Switch>

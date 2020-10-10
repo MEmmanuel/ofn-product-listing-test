@@ -7,7 +7,7 @@ import {ProductCard} from '../components/ProductCard';
 
 export class ListPage extends PureComponent {
     render() {
-        const {products, onAddToCart} = this.props;
+        const {products, onAddToCart, lastAddedProduct} = this.props;
 
         return (
             <Grid container spacing={4}>
@@ -20,6 +20,7 @@ export class ListPage extends PureComponent {
                                 color: 'primary',
                                 handler: onAddToCart,
                             }}
+                            hasBeenAdded={lastAddedProduct === product.id}
                         />
                     </Grid>
                 )}
@@ -28,6 +29,10 @@ export class ListPage extends PureComponent {
     }
 }
 
-ListPage.propTypes = {products: PropTypes.arrayOf(PropTypes.object), onAddToCart: PropTypes.func};
+ListPage.propTypes = {
+    products: PropTypes.arrayOf(PropTypes.object),
+    onAddToCart: PropTypes.func,
+    lastAddedProduct: PropTypes.number,
+};
 
 export default ListPage;
