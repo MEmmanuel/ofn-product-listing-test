@@ -17,6 +17,7 @@ import { AppBar } from './components/AppBar';
 import { ProductCard } from './components/ProductCard';
 import { StyledLink } from './components/StyledLink';
 import Typography from "@material-ui/core/Typography";
+import {StyledButton} from "./components/StyledButton";
 
 
 const theme = createMuiTheme({
@@ -42,6 +43,7 @@ const theme = createMuiTheme({
 
 const StyledContainer = styled(Container)`
     padding-top: 37px;
+    padding-bottom: 100px;
 `
 
 const EmptyCartContainer = styled.div`
@@ -51,6 +53,19 @@ const EmptyCartContainer = styled.div`
 const StyledTypography = styled(Typography)`
     padding-top: 15px;
     padding-bottom: 22px;
+`
+
+const TotalContainer = styled.div`
+    padding-top: 37px;
+`
+
+const TotalTitleSpan = styled.span`
+    font-weight: 700
+`
+
+const TotalSpan = styled.span`
+    color: #5C5C5C;
+    margin-left: 10px;
 `
 
 
@@ -83,6 +98,8 @@ class App extends Component {
     };
 
     render = () => {
+        const totalCartPrice = this.state.cart.reduce((sum, product) => sum + Number(product.price) * 100, 0) / 100;
+
         return (
             <div className="App">
                 <Router>
@@ -97,21 +114,33 @@ class App extends Component {
                                     <StyledTypography variant="h6">My cart</StyledTypography>
                                     {
                                         this.state.cart.length > 0 && (
-                                            <Grid container spacing={4}>
-                                                {this.state.cart.map((product, index) =>
-                                                    <Grid item xs={12} key={index}>
-                                                        <ProductCard product={product}
-                                                                     productIndex={index}
-                                                                     cartAction={{
-                                                                         text: "Remove",
-                                                                         color: "primary",
-                                                                         backgroundColor: "#E47131",
-                                                                         handler: this.handleRemoveFromCart,
-                                                                     }}
-                                                        />
-                                                    </Grid>
-                                                )}
-                                            </Grid>
+                                            <div>
+                                                <Grid container spacing={4}>
+                                                    {this.state.cart.map((product, index) =>
+                                                        <Grid item xs={12} key={index}>
+                                                            <ProductCard product={product}
+                                                                         productIndex={index}
+                                                                         cartAction={{
+                                                                             text: "Remove",
+                                                                             color: "primary",
+                                                                             backgroundColor: "#E47131",
+                                                                             handler: this.handleRemoveFromCart,
+                                                                         }}
+                                                            />
+                                                        </Grid>
+                                                    )}
+                                                </Grid>
+                                                <TotalContainer>
+                                                    <TotalTitleSpan>Total: </TotalTitleSpan>
+                                                    <TotalSpan>€ {totalCartPrice.toFixed(2)}</TotalSpan>
+                                                    <StyledButton color="secondary" variant="contained"
+                                                                  bold={700} uppercase={false} marginLeft={20}
+                                                                  onClick={this.handleCartAction}
+                                                    >
+                                                        Proceed to checkout
+                                                    </StyledButton>
+                                                </TotalContainer>
+                                            </div>
                                         )
                                     }
                                     {

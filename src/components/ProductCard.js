@@ -36,6 +36,29 @@ const GrowGrid = styled(Grid)`
     flex-grow: 1;
 `
 
+const UnitSpan = styled.span`
+    font-size: 10px;
+    color: #5C5C5C;
+    margin-left: 10px;
+`
+
+const DescriptionDiv = styled.div`
+    font-size: 12px;
+    color: #5C5C5C;
+    margin-top: 16px;
+    margin-bottom: 16px;
+`
+
+const PriceTitleSpan = styled.span`
+    font-size: 12px;
+`
+
+const PriceSpan = styled.span`
+    font-size: 12px;
+    color: #5C5C5C;
+    margin-left: 10px;
+`
+
 
 export class ProductCard extends PureComponent {
     handleCartAction = () => {
@@ -56,7 +79,15 @@ export class ProductCard extends PureComponent {
                             </PictureContainer>
                         </Grid>
                         <GrowGrid item>
-                            {product.name}
+                            <div>
+                                <span>{product.name}</span>
+                                <UnitSpan>{product.unit_to_display}</UnitSpan>
+                            </div>
+                            <DescriptionDiv>{product.description}</DescriptionDiv>
+                            <div>
+                                <PriceTitleSpan>Price</PriceTitleSpan>
+                                <PriceSpan>€ {Number(product.price).toFixed(2)}</PriceSpan>
+                            </div>
                         </GrowGrid>
                         <Grid item>
                             <ActionsContainer>
